@@ -4,33 +4,30 @@ using UnityEngine;
 
 public class Window : MonoBehaviour
 {
-    public Transform[] movePoints;
-    public float speed;
-    private int amount;
-    private Transform currentTarget;
-    private float timer = 0f;
+    private Vector3 screenPoint;
+    private Vector3 offset;
 
-    void Start () {
-        Randoming ();
-    }    
 
-    void Update () {
-        Movement ();
-        timer += Time.deltaTime;
-        if (timer > 5.05f)
-        {
-            Randoming();
-            timer = 0f;
-        }
+    // Run this when you click on dah window, get the point and select it
+    private void OnMouseDown()
+    {
+        Debug.Log("Clicky");
+        //screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        //offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+
+        //Debug.Log($"Screen Point: {screenPoint}, Offset: {offset}");
     }
 
-    void Randoming() {
-        amount = Random.Range (0, movePoints.Length);
-        currentTarget = movePoints[amount];
-    }    
+    // Handle this for dragging on dah screen
+    private void OnMouseDrag()
+    {
+        Vector3 currentScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenPoint) + offset;
 
-    void Movement() {
-        transform.position = Vector3.MoveTowards (transform.position, currentTarget.position, speed * Time.deltaTime);
+        Debug.Log(currentPosition);
+
+        transform.position = currentPosition;
+
     }
 
 }

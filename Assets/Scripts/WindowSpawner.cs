@@ -10,11 +10,6 @@ public class WindowSpawner : MonoBehaviour
     private void Start()
     {
         SpawnWindow();
-        SpawnWindow();
-        SpawnWindow();
-        SpawnWindow();
-        SpawnWindow();
-        SpawnWindow();
     }
 
     void SpawnWindow ()
